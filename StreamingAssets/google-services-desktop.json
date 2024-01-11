@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "316402635770",
+    "project_id": "popcatz-be99b",
+    "storage_bucket": "popcatz-be99b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316402635770:android:bf37883234517d99508a43",
+        "android_client_info": {
+          "package_name": "com.talelglobal.popcatz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316402635770-1hma0afcerbee09vk3lilbcu1khdfrqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQue6A5QKbBGyigB15Bb2XJEet_ftgJOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316402635770-1hma0afcerbee09vk3lilbcu1khdfrqb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "316402635770-75hdtjmm4o6e1l1auuhm407ol2varc06.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.talelglobal.popcatz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
