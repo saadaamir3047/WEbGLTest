@@ -15,52 +15,26 @@
             height: 100vh;
         }
 
-        #unity-container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         #unity-canvas {
             background: #231F20;
-            max-width: 90vmin; /* Adjust the maximum width as needed */
-            max-height: 90vmin; /* Adjust the maximum height as needed */
+            max-width: 56.25vmin; /* 16:9 aspect ratio (9 / 16 * 100) */
             width: 100%;
             height: 100%;
         }
     </style>
 </head>
 <body>
-    <div id="unity-container">
-        <canvas id="unity-canvas"></canvas>
-    </div>
+    <canvas id="unity-canvas"></canvas>
     <script src="Build/popcatznew4.loader.js"></script>
     <script>
         function setCanvasSize() {
-            var container = document.getElementById('unity-container');
             var canvas = document.getElementById('unity-canvas');
-            var aspectRatio = 1080 / 1920; // Adjust with your desired resolution (height / width)
-
-            var width = window.innerWidth;
             var height = window.innerHeight;
-
-            if (width / height > aspectRatio) {
-                // If the screen width/height ratio is greater than the canvas ratio
-                canvas.style.width = height * aspectRatio + 'px';
-                canvas.style.height = height + 'px';
-            } else {
-                // If the screen width/height ratio is less than the canvas ratio
-                canvas.style.width = width + 'px';
-                canvas.style.height = width / aspectRatio + 'px';
-            }
-
-            unityInstance.Module.canvas.width = parseInt(canvas.style.width, 10);
-            unityInstance.Module.canvas.height = parseInt(canvas.style.height, 10);
-
-            container.style.width = canvas.style.width;
-            container.style.height = canvas.style.height;
+            var width = (height / 9) * 16; // Calculate width based on 16:9 aspect ratio
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+            unityInstance.Module.canvas.width = width;
+            unityInstance.Module.canvas.height = height;
         }
 
         window.addEventListener('resize', setCanvasSize);
