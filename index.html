@@ -30,7 +30,22 @@
         function setCanvasSize() {
             var canvas = document.getElementById('unity-canvas');
             var height = window.innerHeight;
-            var width = (height / 9) * 16; // Calculate width based on 16:9 aspect ratio
+            var width = window.innerWidth;
+
+            // Calculate the aspect ratio
+            var aspectRatio = 16 / 9; // 16:9 aspect ratio
+            var calculatedWidth = height * aspectRatio;
+
+            // Check if the calculated width exceeds the screen width
+            if (calculatedWidth > width) {
+                // If so, set the width to the screen width and calculate the height
+                width = window.innerWidth;
+                height = width / aspectRatio;
+            } else {
+                // Otherwise, use the calculated width
+                width = calculatedWidth;
+            }
+
             canvas.style.width = width + 'px';
             canvas.style.height = height + 'px';
             unityInstance.Module.canvas.width = width;
