@@ -17,9 +17,10 @@
 
         #unity-canvas {
             background: #231F20;
-            max-width: 56.25vmin; /* 16:9 aspect ratio (9 / 16 * 100) */
-            width: 100%;
-            height: 100%;
+            width: 95vw; /* 95% of the viewport width */
+            height: 95vh; /* 95% of the viewport height */
+            max-width: 100%; /* Maximum width is 100% of the viewport width */
+            max-height: 56.25vw; /* 16:9 aspect ratio (9 / 16 * 100) */
         }
     </style>
 </head>
@@ -29,22 +30,8 @@
     <script>
         function setCanvasSize() {
             var canvas = document.getElementById('unity-canvas');
-            var height = window.innerHeight;
             var width = window.innerWidth;
-
-            // Calculate the aspect ratio
-            var aspectRatio = 16 / 9; // 16:9 aspect ratio
-            var calculatedWidth = height * aspectRatio;
-
-            // Check if the calculated width exceeds the screen width
-            if (calculatedWidth > width) {
-                // If so, set the width to the screen width and calculate the height
-                width = window.innerWidth;
-                height = width / aspectRatio;
-            } else {
-                // Otherwise, use the calculated width
-                width = calculatedWidth;
-            }
+            var height = window.innerHeight;
 
             canvas.style.width = width + 'px';
             canvas.style.height = height + 'px';
