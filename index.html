@@ -47,7 +47,12 @@
             unityInstance.Module.canvas.height = height - margin;
         }
 
+        function preventInputZoom(event) {
+            event.preventDefault();
+        }
+
         window.addEventListener('resize', setCanvasSize);
+        document.addEventListener('focusin', preventInputZoom, true);
 
         createUnityInstance(document.querySelector("#unity-canvas"), {
             dataUrl: "Build/popcatznew4.data",
