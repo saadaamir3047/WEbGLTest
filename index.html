@@ -1,60 +1,29 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Popcatz</title>
     <script src="./polyfills.js"></script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        #unity-canvas {
-            background: #231F20;
-            width: 95vw; /* 95% of the viewport width */
-            height: 95vh; /* 95% of the viewport height */
-            max-width: 95%; /* Maximum width is 100% of the viewport width */
-            max-height: 95%; /* 16:9 aspect ratio (9 / 16 * 100) */
-        }
-    </style>
-</head>
-<body>
-    <canvas id="unity-canvas"></canvas>
+  </head>
+  <body style="text-align: center">
+    <canvas id="unity-canvas" style="width: 675px; height: 900px; background: #231F20"></canvas>
     <script src="Build/popcatznew4.loader.js"></script>
     <script>
-        function setCanvasSize() {
-            var canvas = document.getElementById('unity-canvas');
-            var width = window.innerWidth;
-            var height = window.innerHeight;
-
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
-            unityInstance.Module.canvas.width = width;
-            unityInstance.Module.canvas.height = height;
-        }
-
-        window.addEventListener('resize', setCanvasSize);
-
-        createUnityInstance(document.querySelector("#unity-canvas"), {
-            dataUrl: "Build/popcatznew4.data",
-            frameworkUrl: "Build/popcatznew4.framework.js",
-            codeUrl: "Build/popcatznew4.wasm",
-            streamingAssetsUrl: "StreamingAssets",
-            companyName: "Talelglobal",
-            productName: "Popcatz",
-            productVersion: "1.0",
-        })
-        .then((instance) => {
-            unityInstance = instance;
-            setCanvasSize(); // Set initial canvas size
-        })
-        .catch((message) => { console.warn(message); });
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/popcatznew4.data",
+        frameworkUrl: "Build/popcatznew4.framework.js",
+        codeUrl: "Build/popcatznew4.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Talelglobal",
+        productName: "Popcatz",
+        productVersion: "1.0",
+      })
+      .then((instance) =>
+      {
+        unityInstance = instance;
+      })
+      .catch((message) => { console.warn(message); });
     </script>
-</body>
+  </body>
 </html>
