@@ -39,39 +39,47 @@
     <canvas id="unity-canvas"></canvas>
     <script src="Build/popcatznew4.loader.js"></script>
     <script>
-        function setCanvasSize() {
-            var canvas = document.getElementById('unity-canvas');
-            var width = window.innerWidth;
-            var height = window.innerHeight;
-            var margin = 5; // You can adjust the margin value
+    function setCanvasSize() {
+        var canvas = document.getElementById('unity-canvas');
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        var margin = 5; // You can adjust the margin value
 
-            canvas.style.width = width + 'px';
-            canvas.style.height = (height - margin) + 'px'; // Subtract the margin from the height
-            unityInstance.Module.canvas.width = width;
-            unityInstance.Module.canvas.height = height - margin;
-        }
+        canvas.style.width = width + 'px';
+        canvas.style.height = (height - margin) + 'px'; // Subtract the margin from the height
+        unityInstance.Module.canvas.width = width;
+        unityInstance.Module.canvas.height = height - margin;
+    }
 
-        function preventInputZoom(event) {
-            event.preventDefault();
-        }
+    function preventInputZoom(event) {
+        event.preventDefault();
+    }
 
-        window.addEventListener('resize', setCanvasSize);
-        document.addEventListener('focusin', preventInputZoom, true);
+    function disableInputZoom() {
+        var inputElements = document.querySelectorAll('input, select, textarea');
+        inputElements.forEach(function (element) {
+            element.addEventListener('touchstart', preventInputZoom);
+        });
+    }
 
-        createUnityInstance(document.querySelector("#unity-canvas"), {
-            dataUrl: "Build/popcatznew4.data",
-            frameworkUrl: "Build/popcatznew4.framework.js",
-            codeUrl: "Build/popcatznew4.wasm",
-            streamingAssetsUrl: "StreamingAssets",
-            companyName: "Talelglobal",
-            productName: "Popcatz",
-            productVersion: "1.0",
-        })
-        .then((instance) => {
-            unityInstance = instance;
-            setCanvasSize(); // Set initial canvas size
-        })
-        .catch((message) => { console.warn(message); });
-    </script>
+    window.addEventListener('resize', setCanvasSize);
+    window.addEventListener('DOMContentLoaded', disableInputZoom);
+
+    createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/popcatznew4.data",
+        frameworkUrl: "Build/popcatznew4.framework.js",
+        codeUrl: "Build/popcatznew4.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Talelglobal",
+        productName: "Popcatz",
+        productVersion: "1.0",
+    })
+    .then((instance) => {
+        unityInstance = instance;
+        setCanvasSize(); // Set initial canvas size
+    })
+    .catch((message) => { console.warn(message); });
+</script>
+
 </body>
 </html>
