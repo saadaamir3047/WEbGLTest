@@ -32,7 +32,8 @@
         max-height: 100%;
         tap-highlight-color: rgba(0, 0, 0, 0); /* Disable tap highlight color on iOS */
     }
-    </style>
+</style>
+
 
 </head>
 <body>
@@ -51,15 +52,16 @@
         unityInstance.Module.canvas.height = height - margin;
     }
 
+    function preventInputZoom(event) {
+        event.preventDefault();
+    }
+
     function disableInputZoom() {
-        var lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
-            var now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
+        var inputElements = document.querySelectorAll('input, select, textarea');
+        inputElements.forEach(function (element) {
+            element.addEventListener('touchstart', preventInputZoom);
+            element.addEventListener('touchmove', preventInputZoom);
+        });
     }
 
     window.addEventListener('resize', setCanvasSize);
@@ -80,6 +82,7 @@
     })
     .catch((message) => { console.warn(message); });
 </script>
+
 
 
 
