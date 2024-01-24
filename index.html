@@ -7,84 +7,83 @@
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="./polyfills.js"></script>
     <style>
-    body {
-        margin: 0;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-    }
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-    #unity-canvas {
-        background: #231F20;
-        max-width: 90vmin; /* Adjust the maximum width as needed */
-        width: 100%;
-        height: 100%;
-        margin-bottom: 5vh; /* Adjust the margin as needed */
-        touch-action: none; /* Disable touch actions on the canvas */
-        -webkit-user-drag: none; /* Disable default drag behavior on WebKit browsers */
-    }
+        #unity-canvas {
+            background: #231F20;
+            max-width: 90vmin; /* Adjust the maximum width as needed */
+            width: 100%;
+            height: 100%;
+            margin-bottom: 5vh; /* Adjust the margin as needed */
+            touch-action: none; /* Disable touch actions on the canvas */
+            -webkit-user-drag: none; /* Disable default drag behavior on WebKit browsers */
+        }
 
-    input, select, textarea {
-        font-size: 16px; /* Adjust the font size as needed */
-        max-width: 100%; /* Ensure the input doesn't exceed the canvas width */
-        max-height: 100%;
-        tap-highlight-color: rgba(0, 0, 0, 0); /* Disable tap highlight color on iOS */
-    }
-</style>
-
-
+        input, select, textarea {
+            font-size: 16px; /* Adjust the font size as needed */
+            max-width: 100%; /* Ensure the input doesn't exceed the canvas width */
+            max-height: 100%;
+            tap-highlight-color: rgba(0, 0, 0, 0); /* Disable tap highlight color on iOS */
+        }
+    </style>
 </head>
 <body>
     <canvas id="unity-canvas"></canvas>
     <script src="Build/popcatznew4.loader.js"></script>
     <script>
-    function setCanvasSize() {
-        var canvas = document.getElementById('unity-canvas');
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-        var margin = 5; // You can adjust the margin value
+        function setCanvasSize() {
+            var canvas = document.getElementById('unity-canvas');
+            var width = window.innerWidth;
+            var height = window.innerHeight;
+            var margin = 5; // You can adjust the margin value
 
-        canvas.style.width = width + 'px';
-        canvas.style.height = (height - margin) + 'px'; // Subtract the margin from the height
-        unityInstance.Module.canvas.width = width;
-        unityInstance.Module.canvas.height = height - margin;
-    }
+            canvas.style.width = width + 'px';
+            canvas.style.height = (height - margin) + 'px'; // Subtract the margin from the height
+            unityInstance.Module.canvas.width = width;
+            unityInstance.Module.canvas.height = height - margin;
+        }
 
-    function preventInputZoom(event) {
-        event.preventDefault();
-    }
+        function preventInputZoom(event) {
+            // Prevent zoom only if the event target is an input element
+            if (event.target.tagName.toLowerCase() === 'input') {
+                event.preventDefault();
+            }
+        }
 
-    function disableInputZoom() {
-        var inputElements = document.querySelectorAll('input, select, textarea');
-        inputElements.forEach(function (element) {
-            element.addEventListener('touchstart', preventInputZoom);
-            element.addEventListener('touchmove', preventInputZoom);
-        });
-    }
+        function delayPreventInputZoom(event) {
+            setTimeout(function () {
+                preventInputZoom(event);
+            }, 300); // Adjust the delay as needed
+        }
 
-    window.addEventListener('resize', setCanvasSize);
-    window.addEventListener('DOMContentLoaded', disableInputZoom);
+        function disableInputZoom() {
+            document.addEventListener('touchend', delayPreventInputZoom, true);
+        }
 
-    createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/popcatznew4.data",
-        frameworkUrl: "Build/popcatznew4.framework.js",
-        codeUrl: "Build/popcatznew4.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "Talelglobal",
-        productName: "Popcatz",
-        productVersion: "1.0",
-    })
-    .then((instance) => {
-        unityInstance = instance;
-        setCanvasSize(); // Set initial canvas size
-    })
-    .catch((message) => { console.warn(message); });
-</script>
+        window.addEventListener('resize', setCanvasSize);
+        window.addEventListener('DOMContentLoaded', disableInputZoom);
 
-
-
-
+        createUnityInstance(document.querySelector("#unity-canvas"), {
+            dataUrl: "Build/popcatznew4.data",
+            frameworkUrl: "Build/popcatznew4.framework.js",
+            codeUrl: "Build/popcatznew4.wasm",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "Talelglobal",
+            productName: "Popcatz",
+            productVersion: "1.0",
+        })
+        .then((instance) => {
+            unityInstance = instance;
+            setCanvasSize(); // Set initial canvas size
+        })
+        .catch((message) => { console.warn(message); });
+    </script>
 </body>
 </html>
