@@ -23,6 +23,8 @@
             height: 100%;
             margin-bottom: 5vh; /* Adjust the margin as needed */
             -webkit-user-drag: none; /* Disable default drag behavior on WebKit browsers */
+            touch-action: none; /* Disable touch actions on the canvas */
+            overscroll-behavior: none; /* Disable pull-to-refresh effect on Chrome mobile */
         }
 
         input, select, textarea {
@@ -49,14 +51,12 @@
             unityInstance.Module.canvas.height = height - margin;
         }
 
-        function preventZoom(event) {
-            if (event.touches.length > 1) {
-                event.preventDefault();
-            }
+        function preventInputZoom(event) {
+            event.preventDefault();
         }
 
         window.addEventListener('resize', setCanvasSize);
-        window.addEventListener('touchmove', preventZoom, { passive: false });
+        document.addEventListener('focusin', preventInputZoom, true);
 
         createUnityInstance(document.querySelector("#unity-canvas"), {
             dataUrl: "Build/popcatznew4.data",
