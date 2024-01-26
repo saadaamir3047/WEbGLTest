@@ -1,14 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Popcatz</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="./polyfills.js"></script>
     <style>
         body {
-            margin: 0;
+          text-align: center;
+          margin: 0;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -17,54 +19,32 @@
         }
 
         #unity-canvas {
-            background: #231F20;
-            width: 100vw; /* Full width of the viewport */
+          width: 100vw; /* Full width of the viewport */
             height: 100vh; /* Full height of the viewport */
             -webkit-user-drag: none; /* Disable default drag behavior on WebKit browsers */
             touch-action: none; /* Disable touch actions on the canvas */
             overscroll-behavior: none; /* Disable pull-to-refresh effect on Chrome mobile */
+          background: #231F20;
         }
-
-        input, select, textarea {
-            font-size: 16px; /* Adjust the font size as needed */
-            max-width: 100%; /* Ensure the input doesn't exceed the canvas width */
-            max-height: 100%;
-            tap-highlight-color: rgba(0, 0, 0, 0); /* Disable tap highlight color on iOS */
-        }
-    </style>
+    </style>>
   </head>
   <body>
     <canvas id="unity-canvas"></canvas>
     <script src="Build/popcatznew4.loader.js"></script>
     <script>
-        function setCanvasSize() {
-            var canvas = document.getElementById('unity-canvas');
-            var width = window.innerWidth;
-            var height = window.innerHeight;
-            var margin = 5; // You can adjust the margin value
-
-            canvas.style.width = width + 'px';
-            canvas.style.height = (height - margin) + 'px'; // Subtract the margin from the height
-            unityInstance.Module.canvas.width = width;
-            unityInstance.Module.canvas.height = height - margin;
-        }
-
-        window.addEventListener('resize', setCanvasSize);
-
-        createUnityInstance(document.querySelector("#unity-canvas"), {
-            dataUrl: "Build/popcatznew4.data",
-            frameworkUrl: "Build/popcatznew4.framework.js",
-            codeUrl: "Build/popcatznew4.wasm",
-            streamingAssetsUrl: "StreamingAssets",
-            companyName: "Talelglobal",
-            productName: "Popcatz",
-            productVersion: "1.0",
-        })
-        .then((instance) => {
-            unityInstance = instance;
-            setCanvasSize(); // Set initial canvas size
-        })
-        .catch((message) => { console.warn(message); });
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/popcatznew4.data",
+        frameworkUrl: "Build/popcatznew4.framework.js",
+        codeUrl: "Build/popcatznew4.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Talelglobal",
+        productName: "Popcatz",
+        productVersion: "1.0",
+      })
+      .then((instance) => {
+        unityInstance = instance;
+      })
+      .catch((message) => { console.warn(message); });
     </script>
   </body>
 </html>
