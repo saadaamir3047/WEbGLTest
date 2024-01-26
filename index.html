@@ -9,8 +9,10 @@
     <script src="./polyfills.js"></script>
     <style>
         body {
-            text-align: center;
-            margin: 0;
+          text-align: center;
+          margin: 0;
+            overflow: hidden;
+            display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
@@ -19,7 +21,10 @@
         #unity-canvas {
             width: 100vw; /* Full width of the viewport */
             height: 100vh; /* Full height of the viewport */
-            background: #231F20;
+            -webkit-user-drag: none; /* Disable default drag behavior on WebKit browsers */
+            touch-action: none; /* Disable touch actions on the canvas */
+            overscroll-behavior: none; /* Disable pull-to-refresh effect on Chrome mobile */
+          background: #231F20;
         }
     </style>>
   </head>
