@@ -9,6 +9,7 @@
     <script src="./polyfills.js"></script>
     <style >
         /* styles.css */
+        /* styles.css */
         body {
           text-align: center;
           margin: 0;
@@ -16,26 +17,25 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 95vh; /* Set a fixed height */
+          height: 95vh;
         }
 
         #unity-canvas {
-          height: 95vh; /* Set a fixed height */
+          height: 95vh; /* Full height of the viewport */
+          width: auto; /* Auto width to maintain aspect ratio */
+          max-width: 80vh; /* Set a maximum width for desktop */
           -webkit-user-drag: none; /* Disable default drag behavior on WebKit browsers */
           touch-action: none; /* Disable touch actions on the canvas */
           overscroll-behavior: none; /* Disable pull-to-refresh effect on Chrome mobile */
           background: #231F20;
         }
 
-        @media (min-width: 768px) {
-          /* Apply styles for desktop devices */
+        @media (max-width: 767px) {
+          /* Apply styles for mobile devices */
           #unity-canvas {
-            width: auto; /* Auto width to maintain aspect ratio */
-            max-width: 60vh; /* Set a maximum width for desktop */
-            height: auto; /* Auto height to maintain aspect ratio */
+            width: 100vw; /* Full width of the viewport */
           }
         }
-
     </style>
   </head>
   <body>
