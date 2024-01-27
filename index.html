@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
@@ -8,26 +7,35 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="./polyfills.js"></script>
-    <style>
+    <style >
+        /* styles.css */
         body {
           text-align: center;
           margin: 0;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 90vh;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 90vh;
         }
 
         #unity-canvas {
-            width: 100vw; /* Full width of the viewport */
-            height: 90vh; /* Full height of the viewport */
-            -webkit-user-drag: none; /* Disable default drag behavior on WebKit browsers */
-            touch-action: none; /* Disable touch actions on the canvas */
-            overscroll-behavior: none; /* Disable pull-to-refresh effect on Chrome mobile */
+          height: 90vh; /* Full height of the viewport */
+          -webkit-user-drag: none; /* Disable default drag behavior on WebKit browsers */
+          touch-action: none; /* Disable touch actions on the canvas */
+          overscroll-behavior: none; /* Disable pull-to-refresh effect on Chrome mobile */
           background: #231F20;
         }
-    </style>>
+
+        @media (min-width: 768px) {
+          /* Apply styles for desktop devices */
+          #unity-canvas {
+            width: auto; /* Auto width to maintain aspect ratio */
+            max-width: 60vh; /* Set a maximum width for desktop */
+            height: auto; /* Auto height to maintain aspect ratio */
+          }
+        }
+    </style>
   </head>
   <body>
     <canvas id="unity-canvas"></canvas>
